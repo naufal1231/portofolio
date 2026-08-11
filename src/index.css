@@ -1,0 +1,412 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=JetBrains+Mono:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: #FFFFFF;
+  color: #111111;
+  -webkit-font-smoothing: antialiased;
+}
+
+html { scroll-behavior: smooth; }
+
+/* ─────────────────────────────────────────
+   MATERIAL ICONS
+───────────────────────────────────────── */
+.material-symbols-outlined {
+  font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+}
+
+/* ─────────────────────────────────────────
+   TYPOGRAPHY HELPERS
+───────────────────────────────────────── */
+.font-serif-italic {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+}
+
+/* ─────────────────────────────────────────
+   HERO GRADIENT (radial: green → white)
+───────────────────────────────────────── */
+.hero-gradient {
+  background: radial-gradient(ellipse 1000% 70% at 50% 55%, #B6FF3C 0%, #E8FFD1 35%, #FFFFFF 70%);
+}
+
+/* Works Preview green background gradient */
+.works-gradient {
+  background: linear-gradient(135deg, #B6FF3C 0%, #E8FFD1 50%, #FFFFFF 100%);
+}
+
+/* ─────────────────────────────────────────
+   CARD STYLES (Light)
+───────────────────────────────────────── */
+.pg-card {
+  background: #FAFAFA;
+  border: 1px solid #EAEAEA;
+  border-radius: 20px;
+}
+
+.pg-card-interactive {
+  background: #FAFAFA;
+  border: 1px solid #EAEAEA;
+  border-radius: 20px;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.pg-card-interactive:hover {
+  background: #FFFFFF;
+  border-color: #B6FF3C;
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px -10px rgba(0,0,0,0.08), 0 0 0 1px #B6FF3C33;
+}
+
+/* ─────────────────────────────────────────
+   BUTTONS
+───────────────────────────────────────── */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: #111111;
+  color: #FFFFFF;
+  padding: 0.75rem 1.75rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.btn-primary:hover {
+  background: #222222;
+  transform: scale(1.03);
+  box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background: transparent;
+  color: #111111;
+  padding: 0.75rem 1.75rem;
+  border-radius: 9999px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  border: 1.5px solid #EAEAEA;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-decoration: none;
+}
+.btn-secondary:hover {
+  background: #F7F7F7;
+  border-color: #B6FF3C;
+}
+
+/* ─────────────────────────────────────────
+   PILL / BADGE
+───────────────────────────────────────── */
+.pg-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: 9999px;
+  border: 1.5px solid #EAEAEA;
+  background: #FFFFFF;
+  font-size: 0.8rem;
+  font-weight: 500;
+  color: #444444;
+  white-space: nowrap;
+}
+.pg-pill-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 9999px;
+  flex-shrink: 0;
+}
+
+/* ─────────────────────────────────────────
+   GRADIENT TEXT
+───────────────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(135deg, #7AC500 0%, #B6FF3C 60%, #E8FFD1 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ─────────────────────────────────────────
+   SCROLL REVEAL ANIMATION
+───────────────────────────────────────── */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+
+/* ─────────────────────────────────────────
+   SCROLLBAR (light)
+───────────────────────────────────────── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: #F7F7F7; }
+::-webkit-scrollbar-thumb { background: #DDDDDD; border-radius: 9999px; }
+::-webkit-scrollbar-thumb:hover { background: #BBBBBB; }
+
+/* ─────────────────────────────────────────
+   SECTION LABEL
+───────────────────────────────────────── */
+.section-label {
+  font-size: 0.78rem;
+  font-style: italic;
+  letter-spacing: 0.04em;
+  color: #888888;
+  margin-bottom: 0.75rem;
+  display: block;
+}
+
+/* ─────────────────────────────────────────
+   MARQUEE (trusted by logos)
+───────────────────────────────────────── */
+@keyframes marquee {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+.marquee-track {
+  display: flex;
+  width: max-content;
+  animation: marquee 24s linear infinite;
+}
+.marquee-track:hover { animation-play-state: paused; }
+
+/* ─────────────────────────────────────────
+   PROJECT CARD HOVER
+───────────────────────────────────────── */
+.project-card {
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.project-card:hover {
+  transform: translateY(-5px) scale(1.01);
+  box-shadow: 0 20px 50px -15px rgba(0,0,0,0.12);
+}
+
+/* ─────────────────────────────────────────
+   COPY TOAST
+───────────────────────────────────────── */
+.copy-toast {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 200;
+  background: #111111;
+  color: #FFFFFF;
+  font-size: 0.85rem;
+  font-weight: 700;
+  padding: 0.65rem 1.25rem;
+  border-radius: 9999px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+  transform: translateY(16px);
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  pointer-events: none;
+}
+.copy-toast.show {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* ─────────────────────────────────────────
+   FLOATING PILLS (hero)
+───────────────────────────────────────── */
+@keyframes floatUp {
+  0%, 100% { transform: translateY(0px); }
+  50%       { transform: translateY(-8px); }
+}
+.float-pill   { animation: floatUp 4s ease-in-out infinite; }
+.float-pill-2 { animation: floatUp 5s ease-in-out infinite 0.8s; }
+.float-pill-3 { animation: floatUp 4.5s ease-in-out infinite 1.6s; }
+
+/* ─────────────────────────────────────────
+   GRAYSCALE PHOTO
+───────────────────────────────────────── */
+.photo-grayscale {
+  filter: grayscale(0%) contrast(1.05);
+  transition: filter 0.4s ease;
+}
+.photo-grayscale:hover {
+  filter: grayscale(0%) contrast(1.02);
+}
+
+/* ─────────────────────────────────────────
+   STAGGERED STEP CARDS (How It Works)
+───────────────────────────────────────── */
+.step-card-1 { margin-top: 0px; }
+.step-card-2 { margin-top: 40px; }
+.step-card-3 { margin-top: 0px; }
+
+@media (max-width: 768px) {
+  .step-card-1, .step-card-2, .step-card-3 { margin-top: 0; }
+}
+
+/* ─────────────────────────────────────────
+   PROGRESS BAR SKILL
+───────────────────────────────────────── */
+.skill-bar {
+  height: 6px;
+  background: #EAEAEA;
+  border-radius: 9999px;
+  overflow: hidden;
+}
+.skill-bar-fill-dev {
+  height: 100%;
+  background: linear-gradient(90deg, #7AC500, #B6FF3C);
+  border-radius: 9999px;
+  transition: width 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ─────────────────────────────────────────
+   TIMELINE DOT
+───────────────────────────────────────── */
+.timeline-dot-dev {
+  box-shadow: 0 0 0 4px #E8FFD1, 0 0 12px rgba(182,255,60,0.4);
+}
+
+/* ─────────────────────────────────────────
+   CONTACT FORM FOCUS
+───────────────────────────────────────── */
+.form-input {
+  width: 100%;
+  background: white;
+  border: 1px solid #EAEAEA;
+  border-radius: 0.75rem;
+  padding: 0.75rem 1rem;
+  color: #111111;
+  outline: none;
+  transition: border-color 0.2s ease;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.95rem;
+}
+.form-input::placeholder { color: #BBBBBB; }
+.form-input:focus { border-color: #B6FF3C; }
+
+/* ─────────────────────────────────────────
+   SELECTION COLOR
+───────────────────────────────────────── */
+::selection {
+  background: #B6FF3C;
+  color: #111111;
+}
+
+/* ─────────────────────────────────────────
+   HERO CANVAS OVERLAY
+───────────────────────────────────────── */
+.hero-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}
+
+/* ─────────────────────────────────────────
+   CUSTOM CURSOR RING
+───────────────────────────────────────── */
+.cursor-dot {
+  position: fixed;
+  top: -4px;
+  left: -4px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #B6FF3C;
+  pointer-events: none;
+  z-index: 9999;
+  will-change: transform;
+  mix-blend-mode: difference;
+}
+
+.cursor-ring {
+  position: fixed;
+  top: -18px;
+  left: -18px;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid rgba(182, 255, 60, 0.6);
+  pointer-events: none;
+  z-index: 9998;
+  will-change: transform;
+  transition: width 0.25s ease, height 0.25s ease, border-color 0.25s ease, top 0.25s ease, left 0.25s ease;
+}
+
+.cursor-ring.active {
+  top: -26px;
+  left: -26px;
+  width: 52px;
+  height: 52px;
+  border-color: rgba(182, 255, 60, 0.9);
+  background: rgba(182, 255, 60, 0.08);
+}
+
+/* ─────────────────────────────────────────
+   3D CARD SPOTLIGHT EFFECT
+───────────────────────────────────────── */
+.pg-card-interactive {
+  will-change: transform;
+  transition: transform 0.18s ease, box-shadow 0.18s ease, border-color 0.18s ease, background 0.18s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.pg-card-interactive::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    300px circle at var(--spot-x, -200px) var(--spot-y, -200px),
+    rgba(182, 255, 60, 0.12),
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.pg-card-interactive:hover::before {
+  opacity: 1;
+}
+
+.pg-card-interactive > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ─────────────────────────────────────────
+   PHOTO 3D TRANSITION (Parallax)
+───────────────────────────────────────── */
+.photo-grayscale {
+  filter: grayscale(0%) contrast(1.05);
+  transition: filter 0.4s ease, transform 0.1s ease;
+  will-change: transform;
+}
+
