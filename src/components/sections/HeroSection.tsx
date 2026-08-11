@@ -150,13 +150,6 @@ export default function HeroSection() {
               }}
             />
           </div>
-          {/* Status pill */}
-          <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white border border-pg-border shadow-md">
-              <span className="w-2 h-2 rounded-full animate-pulse bg-green-500" />
-              <span className="text-[11px] font-semibold text-pg-black">Available for work</span>
-            </div>
-          </div>
         </RevealWrapper>
 
         {/* Description */}

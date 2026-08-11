@@ -6,31 +6,6 @@ import type { Project } from '../types';
 export const projects: Project[] = [
   {
     id: '1',
-    title: 'Sistem Database - Marabunta Swimming Club',
-    slug: 'sistem-database-marabunta',
-    category: 'Custom Web',
-    description:
-      'Sistem informasi berbasis web yang dirancang untuk membantu pengelolaan data club renang secara terpusat. Sistem ini mengintegrasikan data atlet, pelatih, keanggotaan, program latihan, serta riwayat aktivitas dalam satu platform sehingga proses administrasi dan pemantauan perkembangan atlet menjadi lebih terstruktur dan efisien.',
-    tags: ['Laravel', 'Html', 'MySQL', 'CSS'],
-    features: [
-      'Dashboard Management',
-      'Manajemen Data Atlet',
-      'Riwayat Performa Atlet',
-      'Authentication & Role Management',
-    ],
-    demoUrl: 'https://demo.e-commerce.com',
-    githubUrl: 'https://github.com/guntur-dev/ecommerce-enterprise',
-    challenge:
-      'Mengelola data atlet yang saling berkaitan',
-    solution:
-      'Relational Database Structure',
-    client: 'MARABUNTA SWIMMING CLUB',
-    year: 2026,
-    isFeatured: true,
-    thumbnailUrl: '/images/internal.png',
-  },
-  {
-    id: '2',
     title: 'Company Profile TTC',
     slug: 'company-profile-ttc',
     category: 'Company Profile',
@@ -53,6 +28,31 @@ export const projects: Project[] = [
     year: 2026,
     isFeatured: true,
     thumbnailUrl: '/images/compro.png',
+  },
+  {
+    id: '2',
+    title: 'Sistem Database - Marabunta Swimming Club',
+    slug: 'sistem-database-marabunta',
+    category: 'Custom Web',
+    description:
+      'Sistem informasi berbasis web yang dirancang untuk membantu pengelolaan data club renang secara terpusat. Sistem ini mengintegrasikan data atlet, pelatih, keanggotaan, program latihan, serta riwayat aktivitas dalam satu platform sehingga proses administrasi dan pemantauan perkembangan atlet menjadi lebih terstruktur dan efisien.',
+    tags: ['Laravel', 'Html', 'MySQL', 'CSS'],
+    features: [
+      'Dashboard Management',
+      'Manajemen Data Atlet',
+      'Riwayat Performa Atlet',
+      'Authentication & Role Management',
+    ],
+    demoUrl: 'https://demo.e-commerce.com',
+    githubUrl: 'https://github.com/guntur-dev/ecommerce-enterprise',
+    challenge:
+      'Mengelola data atlet yang saling berkaitan',
+    solution:
+      'Relational Database Structure',
+    client: 'MARABUNTA SWIMMING CLUB',
+    year: 2026,
+    isFeatured: true,
+    thumbnailUrl: '/images/internal.png',
   },
 ];
 

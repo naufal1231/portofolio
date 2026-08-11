@@ -9,15 +9,6 @@ interface FormState {
   message: string;
 }
 
-/**
- * ContactSection — Contact form + contact info
- * Converted from Blade #contact with Livewire wire:submit
- * - Form submission: local state (shows success message, no backend)
- * - Copy to clipboard: native API (replaces copyText() from app.blade.php)
- *
- * NOTE: To connect to real backend, change handleSubmit to POST to your API.
- * Alternatively, use Formspree (formspree.io) or EmailJS for free email sending.
- */
 export default function ContactSection() {
   const [form, setForm] = useState<FormState>({
     name: '',
@@ -27,6 +18,7 @@ export default function ContactSection() {
   });
   const [sending, setSending] = useState(false);
   const [sent, setSent] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
   const [errors, setErrors] = useState<Partial<FormState>>({});
   const toastRef = useRef<HTMLDivElement>(null);
 
@@ -46,18 +38,46 @@ export default function ContactSection() {
     if (!validate()) return;
 
     setSending(true);
-    // ── Simulate async send (replace with real API call) ──
-    // Example with Formspree:
-    // await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-    //   method: 'POST',
-    //   headers: { 'Content-Type': 'application/json' },
-    //   body: JSON.stringify(form),
-    // });
-    await new Promise((r) => setTimeout(r, 1200));
-    setSending(false);
-    setSent(true);
-    setForm({ name: '', email: '', subject: '', message: '' });
-    setTimeout(() => setSent(false), 5000);
+    setServerError(null);
+    setSent(false);
+
+    try {
+      const formData = new FormData();
+      formData.append('name', form.name);
+      formData.append('email', form.email);
+      formData.append('_replyto', form.email);
+      formData.append('subject', form.subject);
+      formData.append('_subject', form.subject || `Pesan Portofolio dari ${form.name}`);
+      formData.append('message', form.message);
+      formData.append('_gotcha', '');
+
+      const response = await fetch('https://formspree.io/f/xdengenl', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+        },
+        body: formData,
+      });
+
+      if (response.ok) {
+        setSent(true);
+        setForm({ name: '', email: '', subject: '', message: '' });
+        setTimeout(() => setSent(false), 5000);
+      } else {
+        const data = await response.json().catch(() => ({}));
+        if (data && data.errors && Array.isArray(data.errors) && data.errors.length > 0) {
+          setServerError(
+            data.errors.map((err: { message: string }) => err.message).join(', ')
+          );
+        } else {
+          setServerError('Gagal mengirim pesan. Silakan coba lagi nanti.');
+        }
+      }
+    } catch {
+      setServerError('Terjadi kesalahan koneksi. Silakan periksa koneksi internet Anda.');
+    } finally {
+      setSending(false);
+    }
   };
 
   const copyText = (text: string) => {
@@ -224,6 +244,9 @@ export default function ContactSection() {
                 )}
               </div>
 
+              {/* Honeypot for Formspree spam prevention */}
+              <input type="text" name="_gotcha" style={{ display: 'none' }} tabIndex={-1} autoComplete="off" />
+
               {/* Submit */}
               <div className="md:col-span-2 pt-2">
                 <button
@@ -260,6 +283,13 @@ export default function ContactSection() {
                 }}
               >
                 ✓ Pesan berhasil dikirim! Saya akan membalas secepatnya.
+              </div>
+            )}
+
+            {/* Error message */}
+            {serverError && (
+              <div className="mt-4 p-4 rounded-xl text-center text-sm font-bold border transition-all bg-red-50 text-red-600 border-red-200">
+                ✕ {serverError}
               </div>
             )}
           </div>
